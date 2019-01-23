@@ -95,22 +95,21 @@ class amazonSpider(scrapy.Spider):
                     brand_result = brand.replace('\n','').strip()
                 else:
                     brand_result = ''
-                dimensions = response.xpath("//table[@id='productDetails_detailBullets_sections1']/tbody/tr[1]/td/text()").extract_first("")
-                if dimensions:
-                    dimensions_result = dimensions
+                dimensions_result = response.xpath("//table[@id='productDetails_detailBullets_sections1']/tbody/tr[1]/td/text()").extract_first("")
+                productWeight_result = response.xpath("//table[@id='productDetails_detailBullets_sections1']/tbody/tr[2]/td/text()").extract_first("")
+                shippingWeight = response.xpath("//table[@id='productDetails_detailBullets_sections1']/tbody/tr[3]/td/text()").extract_first("")
+                if shippingWeight:
+                    shippingWeight_result = shippingWeight.replace('View shipping rates and policies','')
                 else:
-                    dimensions_result = ''
-
-                # if len(row_data) == 2:
-                    # print(response.headers.coolie)
-                    # cookie = self.cookie_jar.extract_cookies(response,response.request)
-                    # print(cookie)
-                    # self.r.rpush(self.hash('cookie'),json.dumps(cookie))
+                    shippingWeight_result = ''
             # l.add_value('lower_frame', availability_result)
             # l.add_value('comment_num', reviewCount_result[0])
             # l.add_value('stars', rating_result[0])
-            l.add_value('title',title_result)
-            l.add_value('brand',brand_result)
+            # l.add_value('title',title_result)
+            # l.add_value('brand',brand_result)
+            l.add_value('dimensions', dimensions_result)
+            l.add_value('productWeight', productWeight_result)
+            l.add_value('shippingWeight', shippingWeight_result)
             l.add_value('is_404', '')
             l.add_value('is_robot', robot_result)
         amazon_item = l.load_item()

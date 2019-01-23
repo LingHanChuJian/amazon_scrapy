@@ -14,7 +14,8 @@ class AmazonScrapyPipeline(object):
         self.csvFile = open(os.path.join(self.getDesktop(),'csvFile.csv'),'w',newline='')
         self.writer = csv.writer(self.csvFile)
         # self.writer.writerow(['Marketplace Name','ASIN','是否下架','评论数量','星星','链接','is_404','is_robot'])
-        self.writer.writerow(['Marketplace Name','ASIN','标题','品牌','is_404','is_robot'])
+        # self.writer.writerow(['Marketplace Name','ASIN','标题','品牌','is_404','is_robot'])
+        self.writer.writerow(['Marketplace Name','ASIN','尺寸','产品重量','货运重量','链接','is_404','is_robot'])
 
     def getDesktop(self):
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER,r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders')
@@ -24,8 +25,11 @@ class AmazonScrapyPipeline(object):
         row_data = []
         row_data.append(item['Marketplace_Name'][0])
         row_data.append(item['ASIN'][0])
-        row_data.append(item['title'][0])
-        row_data.append(item['brand'][0])
+        row_data.append(item['dimensions'][0])
+        row_data.append(item['productWeight'][0])
+        row_data.append(item['shippingWeight'][0])
+        # row_data.append(item['title'][0])
+        # row_data.append(item['brand'][0])
         # row_data.append(item['lower_frame'][0])
         # row_data.append(item['comment_num'][0])
         # row_data.append(item['stars'][0])
