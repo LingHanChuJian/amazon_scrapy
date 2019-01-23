@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+autopep8 = "*"
+
+[packages]
+xlrd = "*"
+scrapy = "*"
+pywin32 = {path = "C:/Users/Linghanchujian/Desktop/pywin32-224-cp36-cp36m-win_amd64.whl"}
+redis = "*"
+
+[requires]
+python_version = "3.6"
